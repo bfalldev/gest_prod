@@ -4,10 +4,8 @@ require_once 'model/db.php';
 require_once 'model/produitModel.php';
 $list = listeProduit();
 $list_prod = mysqli_fetch_all($list);
-$max = mysqli_fetch_row(quantiteMax());
-$min = mysqli_fetch_row(quantiteMin());
 ?>
-<form action="controller/VenteController.php" method="post">
+<form class="form" action="controller/VenteController.php" method="post">
     <h3 class="text-success">Donnees relatives au client</h3>
     <div class='form-group'>
         <label class='control-label'>NOM</label>
@@ -43,10 +41,10 @@ $min = mysqli_fetch_row(quantiteMin());
             </div>
         </div>
     </h3>
-    <div class="input-group control-group increment">
+    <div class="control-group increment">
         <div class="form-group">
             <label class='control-label'>Produit</label>
-            <select name="produits[]" class="form-control custom-select-sm">
+            <select name="produits[]" class="form-control">
                 <?php
                 foreach ($list_prod as $c) {
                     ?>
@@ -58,7 +56,7 @@ $min = mysqli_fetch_row(quantiteMin());
         </div>
         <div class='form-group'>
             <label class='control-label'>Quantite</label>
-            <input id="quantite" type="number" class="form-control" name="quantites[]" placeholder="il en reste <?=$max[0] ?>" max="<?=$max[0] ?>" required="required">
+            <input class="form-control" id="quantite" type="number" name="quantites[]" placeholder="" max="" required="required">
         </div>
     </div>
     <!--<div class="clone hide disabled">
@@ -95,7 +93,7 @@ $min = mysqli_fetch_row(quantiteMin());
 
         $(".btn-success").click(function(){
             var html = $(".increment").html();
-            $(".increment").after(html);
+            $(".increment").before(html);
         });
 
         $("body").on("click",".btn-danger",function(){
